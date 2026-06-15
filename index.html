@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Lecker</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,400&family=Space+Grotesk:wght@400;500&display=swap');
+
+  :root {
+    --bg: #0c0b0d;
+    --bg-soft: #15131a;
+    --gold: #f5f3ef;
+    --gold-dim: #6e6b66;
+    --text: #ffffff;
+    --text-dim: #8c8790;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    height: 100%;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Ambient glow — signature element: a slow breathing light, like a single fixture in an empty venue */
+  .glow {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 140vmax;
+    height: 140vmax;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 28%, transparent 60%);
+    animation: breathe 9s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 0.55; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
+  }
+
+  /* Fine grain texture for depth */
+  .noise {
+    position: fixed;
+    inset: 0;
+    opacity: 0.035;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .container {
+    position: relative;
+    z-index: 2;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 24px;
+  }
+
+  .eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 1.75rem;
+    opacity: 0;
+    animation: fadeUp 1.2s ease-out 0.2s forwards;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(3.5rem, 14vw, 9rem);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    color: var(--text);
+    opacity: 0;
+    animation: fadeUp 1.4s ease-out 0.4s forwards;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .rule {
+    width: 1px;
+    height: 0;
+    background: linear-gradient(to bottom, transparent, var(--gold-dim), transparent);
+    margin: 2rem 0;
+    opacity: 0;
+    animation: growLine 1s ease-out 1s forwards;
+  }
+
+  @keyframes growLine {
+    to { height: 56px; opacity: 1; }
+  }
+
+  .tagline {
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    color: var(--text);
+    font-weight: 400;
+    max-width: 90vw;
+    white-space: nowrap;
+    opacity: 0;
+    animation: fadeUp 1.2s ease-out 1.3s forwards;
+  }
+
+  .contact {
+    margin-top: 1.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--gold-dim);
+    font-weight: 400;
+    opacity: 0;
+    animation: fadeUp 1.2s ease-out 1.6s forwards;
+  }
+
+  .contact a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease, color 0.3s ease;
+  }
+
+  .contact a:hover {
+    color: var(--text);
+    border-color: var(--gold-dim);
+  }
+
+  .status {
+    position: absolute;
+    bottom: 36px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    opacity: 0;
+    animation: fadeUp 1.2s ease-out 1.8s forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .glow { animation: none; opacity: 0.7; }
+    .eyebrow, h1, .rule, .tagline, .contact, .status {
+      animation: none;
+      opacity: 1;
+    }
+    .rule { height: 56px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="glow"></div>
+  <div class="noise"></div>
+
+  <div class="container">
+    <h1>Lecker</h1>
+    <div class="rule"></div>
+    <p class="tagline">Tasteful sound. Selectively served.</p>
+    <p class="contact"><a href="mailto:info@thelecker.com">info@thelecker.com</a></p>
+  </div>
+
+</body>
+</html>
